@@ -14,7 +14,18 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(params[:article])
+    puts "*"*50
+    puts params
+    puts "*"*50
+    title = params[:article][:title]
+    tag_list = params[:article][:tag_list]
+    body = params[:article][:body]
+    @article = Article.new()
+    @article.title = title
+    @article.tag_list = tag_list
+    @article.body = body
+
+    #@article = Article.new(params[:article])
 
     @article.save
 
