@@ -2,7 +2,11 @@ class ArticlesController < ApplicationController
   before_filter :require_login, :except => [:index, :show]
   
   def index
-    @articles = Article.all
+    @articles = Article.only(params[:limit]).ordered_by(params[:order_by])
+
+    #this works
+    #articles_unlimited = Article.ordered_by(params[:order_by])
+    #@articles = articles_unlimited.limit(params[:limit]) 
   end
 
   def show
@@ -14,9 +18,6 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    puts "*"*50
-    puts params
-    puts "*"*50
     title = params[:article][:title]
     tag_list = params[:article][:tag_list]
     body = params[:article][:body]

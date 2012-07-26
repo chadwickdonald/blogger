@@ -1,5 +1,19 @@
 <h1>All Articles</h1>
 
+order articles by: 
+<%= link_to "title", articles_path(:order_by => 'title') %>
+
+<%= link_to "word count", articles_path(:order_by => 'body_length') %>
+
+<%= link_to "published", articles_path(:order_by => 'published') %>
+
+<%= form_tag(articles_path, :method=>'get', :multipart => true) do %>
+	<p>
+   	Articles per page:
+   	<%= text_field_tag(:limit) %>  
+	</p>
+<% end %>
+
 <ul>
   <% @articles.each do |article| %>
     <li>
